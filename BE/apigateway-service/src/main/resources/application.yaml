@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8080
 
 eureka:
   client:
@@ -15,11 +15,12 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: user-service
-          uri: lb://USER-SERVICE
+        - id: pdf-service
+          uri: lb://FASTAPI-PDF-SERVICE
           predicates:
-            - Path=/user-service/**
-            - Method=GET
+            - Path=/pdf/**
+          filters:
+            - StripPrefix=1
 
 logging:
   level:
