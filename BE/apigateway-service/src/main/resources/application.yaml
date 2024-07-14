@@ -1,20 +1,28 @@
 server:
-  port: 8000
+  port: 8080
+
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
-
     service-url:
       defaultZone: http://localhost:8761/eureka
 
 spring:
   application:
     name: apigateway-service
+
   cloud:
     gateway:
       routes:
-        - id: user-service
-          uri: lb://USER-SERVICE
+        - id: pdf-service
+          uri: lb://FASTAPI-PDF-SERVICE
           predicates:
-            - Path=/user-service/**
+            - Path=/pdf/**
+          filters:
+            - StripPrefix=1
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
