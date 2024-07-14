@@ -1,5 +1,5 @@
 server:
-  port: 7000
+  port: 8000
 
 eureka:
   client:
@@ -15,14 +15,13 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: fastapi-pdf-service
-          uri: lb://FASTAPI-PDF-SERVICE
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
-            - Path=/pdf/**
-        - id: default
-          uri: http://localhost:7000
-          predicates:
-            - Path=/**
-      discovery:
-        locator:
-          enabled: true
+            - Path=/user-service/**
+            - Method=GET
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
