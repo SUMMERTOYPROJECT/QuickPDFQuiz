@@ -6,3 +6,6 @@ pydantic
 sqlalchemy
 langchain
 pypdf
+sentence-transformers
+faiss-cpu
+aiofiles
